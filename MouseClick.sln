@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30517.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MouseClick", "MouseClick\MouseClick.csproj", "{6711F74F-8A36-46B5-B488-ECC802C61ABC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6711F74F-8A36-46B5-B488-ECC802C61ABC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6711F74F-8A36-46B5-B488-ECC802C61ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6711F74F-8A36-46B5-B488-ECC802C61ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6711F74F-8A36-46B5-B488-ECC802C61ABC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E6A1968-BB6F-4EA9-B18E-7C361A95537F}
+	EndGlobalSection
+EndGlobal
