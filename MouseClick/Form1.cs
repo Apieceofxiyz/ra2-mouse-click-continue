@@ -15,6 +15,7 @@ namespace MouseClick
     public partial class Form1 : Form
     {
         private IKeyboardMouseEvents KMEvents;
+        private Config Config = new Config();
 
         private readonly int ScreenWidth = Screen.PrimaryScreen.WorkingArea.Width;
 
@@ -44,6 +45,7 @@ namespace MouseClick
             KMEvents.KeyUp += KMEvents_KeyUp;
             KMEvents.MouseUp += KMEvents_MouseClick;
             Console.WriteLine(ScreenWidth);
+            Console.WriteLine(Config.EnableRa2Mode);
         }
 
         private void KMEvents_MouseClick(object sender, MouseEventArgs e)
@@ -58,17 +60,24 @@ namespace MouseClick
             }
         }
 
+        private bool shouldClick()
+        {
+            int x = Cursor.Position.X;
+            int y = Cursor.Position.Y;
+            return shouldClick(x, y);
+        }
+
         private bool shouldClick(int x, int y)
         {
-            return shiftDown && ScreenWidth - x < 240;
+            return Config.EnableRa2Mode ? ScreenWidth - x < Config.ConstructionBarWidth : true;
         }
 
         private void mouseLeftClicked(int x, int y)
         {
             if (clicking)
                 return;
-            if (shouldClick(x, y))
-                multipleClickLeft(9);
+            if (shiftDown && shouldClick(x, y))
+                multipleClickLeft(Config.ClickCounts - 1);
         }
 
         private void multipleClickLeft(int counts)
@@ -80,7 +89,7 @@ namespace MouseClick
                 for (i = 0; i < counts; i++)
                 {
                     MouseSimulator.Click(MouseButtons.Left);
-                    Thread.Sleep(10);
+                    Thread.Sleep(Config.ClickInterval);
                 }
                 clicking = false;
                 shiftDown = false;
@@ -89,17 +98,29 @@ namespace MouseClick
 
         private void KMEvents_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.LShiftKey)
+            if (Config.UseRa2olStyle)
             {
-                shiftDown = false;
+                if ((int)e.KeyCode == Config.HotKeyCode)
+                {
+                    shiftDown = false;
+                }
             }
         }
 
         private void KMEvents_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.LShiftKey)
+            if (Config.UseRa2olStyle)
             {
-                shiftDown = true;
+                if ((int)e.KeyCode == Config.HotKeyCode)
+                {
+                    shiftDown = true;
+                }
+            } else
+            {
+                if (shouldClick())
+                {
+                    multipleClickLeft(Config.ClickCounts);
+                }
             }
         }
 
