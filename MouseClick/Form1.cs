@@ -28,22 +28,32 @@ namespace MouseClick
             this.FormClosing += Form1_FormClosing;
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        private void UnSubscribe()
         {
             KMEvents.KeyDown -= KMEvents_KeyDown;
             KMEvents.KeyUp -= KMEvents_KeyUp;
-            KMEvents.MouseClick -= KMEvents_MouseClick;
+            KMEvents.MouseDown -= KMEvents_MouseClick;
 
             KMEvents.Dispose();
             KMEvents = null;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Subscribe()
         {
             KMEvents = Hook.GlobalEvents();
             KMEvents.KeyDown += KMEvents_KeyDown;
             KMEvents.KeyUp += KMEvents_KeyUp;
-            KMEvents.MouseUp += KMEvents_MouseClick;
+            KMEvents.MouseDown += KMEvents_MouseClick;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UnSubscribe();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Subscribe();
             Console.WriteLine(ScreenWidth);
             Console.WriteLine(Config.EnableRa2Mode);
         }
@@ -77,7 +87,7 @@ namespace MouseClick
             if (clicking)
                 return;
             if (shiftDown && shouldClick(x, y))
-                multipleClickLeft(Config.ClickCounts - 1);
+                multipleClickLeft(Config.ClickCounts);
         }
 
         private void multipleClickLeft(int counts)
