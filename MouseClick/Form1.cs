@@ -17,8 +17,6 @@ namespace MouseClick
         private IKeyboardMouseEvents KMEvents;
         private Config Config = new Config();
 
-        private readonly int ScreenWidth = Screen.PrimaryScreen.WorkingArea.Width;
-
         private bool clicking = false;
         private bool shiftDown = false;
 
@@ -54,7 +52,7 @@ namespace MouseClick
         private void Form1_Load(object sender, EventArgs e)
         {
             Subscribe();
-            Console.WriteLine(ScreenWidth);
+            Console.WriteLine(Config.ScreenWidth);
             Console.WriteLine(Config.EnableRa2Mode);
         }
 
@@ -79,7 +77,7 @@ namespace MouseClick
 
         private bool shouldClick(int x, int y)
         {
-            return Config.EnableRa2Mode ? ScreenWidth - x < Config.ConstructionBarWidth : true;
+            return Config.EnableRa2Mode ? Config.ScreenWidth - x < Config.ConstructionBarWidth : true;
         }
 
         private void mouseLeftClicked(int x, int y)

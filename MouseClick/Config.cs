@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MouseClick
 {
@@ -92,6 +93,25 @@ namespace MouseClick
             set
             {
                 writeRa2Config("ConstructionBarWidth", value.ToString());
+            }
+        }
+
+        public int ScreenWidth
+        {
+            get
+            {
+                try
+                {
+                    return int.Parse(getRa2Config("ScreenWidth"));
+                }
+                catch
+                {
+                    return Screen.PrimaryScreen.WorkingArea.Width;
+                }
+            }
+            set
+            {
+                writeRa2Config("ScreenWidth", value.ToString());
             }
         }
 
