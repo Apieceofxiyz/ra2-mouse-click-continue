@@ -12,15 +12,18 @@ namespace MouseClick
     public class Config
     {
         private readonly static string AppRoot = AppDomain.CurrentDomain.BaseDirectory;
-        private readonly string configFile = Path.Combine(AppRoot, "config.ini");
+        public readonly string ConfigFile = Path.Combine(AppRoot, "config.ini");
+
+        public readonly string ClickingOnLabel = "已开启连点(点击关闭)";
+        public readonly string ClickingOffLabel = "已关闭连点(点击开启)";
 
         public Config()
         {
             // 转换配置文件编码为 Encoding.Default 否则无法读取配置
-            if (GetFileEncoding(configFile) != Encoding.Default)
+            if (GetFileEncoding(ConfigFile) != Encoding.Default)
             {
-                string configStr = File.ReadAllText(configFile);
-                File.WriteAllText(configFile, configStr, Encoding.Default);
+                string configStr = File.ReadAllText(ConfigFile);
+                File.WriteAllText(ConfigFile, configStr, Encoding.Default);
             }
         }
 
@@ -69,6 +72,37 @@ namespace MouseClick
             set
             {
                 writeCoreConfig("ClickInterval", value.ToString());
+            }
+        }
+
+        public string TextEditor
+        {
+            get
+            {
+                return getCoreConfig("TextEditor");
+            }
+            set
+            {
+                writeCoreConfig("TextEditor", value);
+            }
+        }
+
+        public string Author
+        {
+            get
+            {
+                try
+                {
+                    return getCoreConfig("Author");
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+            set
+            {
+                writeCoreConfig("Author", value);
             }
         }
 
@@ -134,13 +168,13 @@ namespace MouseClick
 
         private bool writeConfig(string section, string key, string value)
         {
-            return 0 != WritePrivateProfileString(section, key, value, configFile);
+            return 0 != WritePrivateProfileString(section, key, value, ConfigFile);
         }
 
         private string getConfig(string section, string key, int nSize = 1024, string defaultValue = "")
         {
             StringBuilder sb = new StringBuilder(nSize);
-            GetPrivateProfileString(section, key, defaultValue, sb, nSize, configFile);
+            GetPrivateProfileString(section, key, defaultValue, sb, nSize, ConfigFile);
             return sb.ToString();
         }
 

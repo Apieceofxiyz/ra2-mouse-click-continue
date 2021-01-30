@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -28,40 +30,47 @@ namespace MouseClick
 
         private void UnSubscribe()
         {
-            KMEvents.KeyDown -= KMEvents_KeyDown;
-            KMEvents.KeyUp -= KMEvents_KeyUp;
-            KMEvents.MouseDown -= KMEvents_MouseClick;
+            try
+            {
+                KMEvents.KeyDown -= KMEvents_KeyDown;
+                KMEvents.KeyUp -= KMEvents_KeyUp;
+                KMEvents.MouseDown -= KMEvents_MouseClick;
 
-            KMEvents.Dispose();
-            KMEvents = null;
+                KMEvents.Dispose();
+                KMEvents = null;
+            } catch { }
         }
 
         private void Subscribe()
         {
-            KMEvents = Hook.GlobalEvents();
-            KMEvents.KeyDown += KMEvents_KeyDown;
-            KMEvents.KeyUp += KMEvents_KeyUp;
-            KMEvents.MouseDown += KMEvents_MouseClick;
+            try
+            {
+                KMEvents = Hook.GlobalEvents();
+                KMEvents.KeyDown += KMEvents_KeyDown;
+                KMEvents.KeyUp += KMEvents_KeyUp;
+                KMEvents.MouseDown += KMEvents_MouseClick;
+            } catch { }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            UnSubscribe();
+            if (Config.ClickingOnLabel.Equals(button2.Text))
+                UnSubscribe();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            if ("lenchu".Equals(Config.Author))
+            {
+                this.Text = $"{this.Text} by lenchu";
+            }
+
             Subscribe();
-            Console.WriteLine(Config.ScreenWidth);
-            Console.WriteLine(Config.EnableRa2Mode);
+            button2.Text = Config.ClickingOnLabel;
         }
 
         private void KMEvents_MouseClick(object sender, MouseEventArgs e)
         {
-            Console.WriteLine(e.Button);
-            Console.WriteLine($"{e.X}, {e.Y}");
-            Console.WriteLine($"clicking: {clicking}, shiftDown: {shiftDown}, shouldClick: {shouldClick(e.X, e.Y)}");
-
             if (e.Button == MouseButtons.Left)
             {
                 mouseLeftClicked(e.X, e.Y);
@@ -134,8 +143,43 @@ namespace MouseClick
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int count = int.Parse(button1.Text);
-            button1.Text = $"{++count}";
+            // 查看/修改 配置文件
+            Process p = new Process();
+            p.StartInfo.UseShellExecute = true;
+
+            string textEditor = Config.TextEditor;
+            if (Path.IsPathRooted(textEditor))
+            {
+                FileInfo fileInfo = new FileInfo(textEditor);
+                p.StartInfo.WorkingDirectory = fileInfo.Directory.FullName;
+                p.StartInfo.FileName = fileInfo.Name;
+            }
+            else
+            {
+                p.StartInfo.FileName = textEditor;
+            }
+
+            p.StartInfo.Arguments = Config.ConfigFile;
+
+            p.Start();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (Config.ClickingOnLabel.Equals(button2.Text))
+            {
+                UnSubscribe();
+                button2.Text = Config.ClickingOffLabel;
+            } else if (Config.ClickingOffLabel.Equals(button2.Text))
+            {
+                Subscribe();
+                button2.Text = Config.ClickingOnLabel;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://gitee.com/lenchu/ra2-mouse-click");
         }
     }
 }
