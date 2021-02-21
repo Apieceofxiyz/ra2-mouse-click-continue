@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gma.System.MouseKeyHook;
+using MouseClick.plugins;
 
 namespace MouseClick
 {
@@ -22,10 +23,14 @@ namespace MouseClick
         private bool clicking = false;
         private bool shiftDown = false;
 
+        private List<ISubscribe> plugins = new List<ISubscribe>();
+
         public Form1()
         {
             InitializeComponent();
             this.FormClosing += Form1_FormClosing;
+
+            this.plugins.Add(new TeamControlPlugin());
         }
 
         private void UnSubscribe()
@@ -38,6 +43,11 @@ namespace MouseClick
 
                 KMEvents.Dispose();
                 KMEvents = null;
+
+                foreach (var plugin in this.plugins)
+                {
+                    plugin.SubscribeHandler(false, this.KMEvents);
+                }
             } catch { }
         }
 
@@ -49,6 +59,11 @@ namespace MouseClick
                 KMEvents.KeyDown += KMEvents_KeyDown;
                 KMEvents.KeyUp += KMEvents_KeyUp;
                 KMEvents.MouseDown += KMEvents_MouseClick;
+
+                foreach (var plugin in this.plugins)
+                {
+                    plugin.SubscribeHandler(true, this.KMEvents);
+                }
             } catch { }
         }
 
