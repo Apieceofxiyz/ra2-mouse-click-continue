@@ -149,6 +149,56 @@ namespace MouseClick
             }
         }
 
+        public bool AutoDetectMode
+        {
+            get
+            {
+                return bool.Parse(getRa2Config("AutoDetectMode"));
+            }
+            set
+            {
+                writeRa2Config("AutoDetectMode", value.ToString());
+            }
+        }
+
+        public int AutoDetectInterval
+        {
+            get
+            {
+                try
+                {
+                    return int.Parse(getRa2Config("AutoDetectInterval"));
+                }
+                catch
+                {
+                    return 5000;
+                }
+            }
+            set
+            {
+                writeRa2Config("AutoDetectInterval", value.ToString());
+            }
+        }
+
+        public string GameProcessFileName
+        {
+            get
+            {
+                try
+                {
+                    return getRa2Config("GameProcessFileName");
+                }
+                catch
+                {
+                    return "game-processes.txt";
+                }
+            }
+            set
+            {
+                writeRa2Config("GameProcessFileName", value);
+            }
+        }
+
         private bool writeCoreConfig(string key, string value)
         {
             return writeConfig("core", key, value);

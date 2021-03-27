@@ -14,7 +14,25 @@ namespace MouseClick
 
         private void initialize()
         {
+            // 创建日志文件夹
             Directory.CreateDirectory(Path.Combine(Config.AppRoot, logFileDir));
+
+            // 初始化 gameProcessList
+            string[] gameProcesses =
+                File.ReadAllLines(Path.Combine(Config.AppRoot, Config.GameProcessFileName));
+            gameProcessList = new List<string>();
+            foreach (var gp in gameProcesses)
+            {
+                if (!string.IsNullOrEmpty(gp))
+                {
+                    gameProcessList.Add(gp);
+                }
+            }
+
+            if (Config.AutoDetectMode)
+            {
+                checkBox2.Checked = true;
+            }
         }
     }
 }
