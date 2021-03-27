@@ -60,8 +60,6 @@ namespace MouseClick
                 {
                     plugin.SubscribeHandler(false, this.KMEvents);
                 }
-            } catch { }
-        }
             } catch(Exception e) {
                 log.Error("UnSubscribe failed", e);
             }
@@ -82,8 +80,6 @@ namespace MouseClick
                 {
                     plugin.SubscribeHandler(true, this.KMEvents);
                 }
-            } catch { }
-        }
             } catch (Exception e)
             {
                 log.Error("Subscribe failed", e);
