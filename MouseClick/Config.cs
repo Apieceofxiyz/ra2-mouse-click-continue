@@ -11,7 +11,7 @@ namespace MouseClick
 {
     public class Config
     {
-        private readonly static string AppRoot = AppDomain.CurrentDomain.BaseDirectory;
+        public readonly static string AppRoot = AppDomain.CurrentDomain.BaseDirectory;
         public readonly string ConfigFile = Path.Combine(AppRoot, "config.ini");
 
         public readonly string ClickingOnLabel = "已开启连点(点击关闭)";
