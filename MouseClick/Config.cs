@@ -11,7 +11,7 @@ namespace MouseClick
 {
     public class Config
     {
-        private readonly static string AppRoot = AppDomain.CurrentDomain.BaseDirectory;
+        public readonly static string AppRoot = AppDomain.CurrentDomain.BaseDirectory;
         public readonly string ConfigFile = Path.Combine(AppRoot, "config.ini");
 
         public readonly string ClickingOnLabel = "已开启连点(点击关闭)";
@@ -146,6 +146,56 @@ namespace MouseClick
             set
             {
                 writeRa2Config("ScreenWidth", value.ToString());
+            }
+        }
+
+        public bool AutoDetectMode
+        {
+            get
+            {
+                return bool.Parse(getRa2Config("AutoDetectMode"));
+            }
+            set
+            {
+                writeRa2Config("AutoDetectMode", value.ToString());
+            }
+        }
+
+        public int AutoDetectInterval
+        {
+            get
+            {
+                try
+                {
+                    return int.Parse(getRa2Config("AutoDetectInterval"));
+                }
+                catch
+                {
+                    return 5000;
+                }
+            }
+            set
+            {
+                writeRa2Config("AutoDetectInterval", value.ToString());
+            }
+        }
+
+        public string GameProcessFileName
+        {
+            get
+            {
+                try
+                {
+                    return getRa2Config("GameProcessFileName");
+                }
+                catch
+                {
+                    return "game-processes.txt";
+                }
+            }
+            set
+            {
+                writeRa2Config("GameProcessFileName", value);
             }
         }
 
