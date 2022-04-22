@@ -80,10 +80,10 @@ namespace MouseClick
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if ("lenchu".Equals(Config.Author))
-            {
-                this.Text = $"{this.Text} by lenchu";
-            }
+            //if ("lenchu".Equals(Config.Author))
+            //{
+            //    this.Text = $"{this.Text} by lenchu";
+            //}
 
             //Subscribe();
             //button2.Text = Config.ClickingOnLabel;
@@ -94,10 +94,15 @@ namespace MouseClick
 
         private void KMEvents_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
+            if (Config.LeftClick && e.Button == MouseButtons.Left)
             {
                 log.Debug($"鼠标左键点击了: ({e.X},{e.Y})位置");
-                mouseLeftClicked(e.X, e.Y);
+                mouseClicked(e.X, e.Y);
+            }
+            if (Config.RightClick && e.Button == MouseButtons.Right)
+            {
+                log.Debug($"鼠标右键点击了: ({e.X},{e.Y})位置");
+                mouseClicked(e.X, e.Y, MouseButtons.Right);
             }
         }
 
@@ -113,7 +118,7 @@ namespace MouseClick
             return Config.EnableRa2Mode ? Config.ScreenWidth - x < Config.ConstructionBarWidth : true;
         }
 
-        private void mouseLeftClicked(int x, int y)
+        private void mouseClicked(int x, int y, MouseButtons mouseButton = MouseButtons.Left)
         {
             if (clicking)
             {
@@ -121,19 +126,19 @@ namespace MouseClick
                 return;
             }
             if (shiftDown && shouldClick(x, y))
-                multipleClickLeft(Config.ClickCounts);
+                multipleClickMouse(Config.ClickCounts, mouseButton);
         }
 
-        private void multipleClickLeft(int counts)
+        private void multipleClickMouse(int counts, MouseButtons mouseButton = MouseButtons.Left)
         {
             clicking = true;
             Task.Run(() =>
             {
-                log.Info($"开始连点: ({Cursor.Position.X},{Cursor.Position.Y})");
+                log.Info($"开始连点({mouseButton.ToString()}): ({Cursor.Position.X},{Cursor.Position.Y})");
                 int i = 0;
                 for (i = 0; i < counts; i++)
                 {
-                    MouseSimulator.Click(MouseButtons.Left);
+                    MouseSimulator.Click(mouseButton);
                     Thread.Sleep(Config.ClickInterval);
                 }
                 clicking = false;
@@ -167,7 +172,7 @@ namespace MouseClick
             {
                 if (shouldClick())
                 {
-                    multipleClickLeft(Config.ClickCounts);
+                    multipleClickMouse(Config.ClickCounts);
                 }
             }
         }

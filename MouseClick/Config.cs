@@ -51,6 +51,30 @@ namespace MouseClick
             }
         }
 
+        public bool LeftClick
+        {
+            get
+            {
+                return bool.Parse(getCoreConfig("LeftClick"));
+            }
+            set
+            {
+                writeCoreConfig("LeftClick", value.ToString());
+            }
+        }
+
+        public bool RightClick
+        {
+            get
+            {
+                return bool.Parse(getCoreConfig("RightClick"));
+            }
+            set
+            {
+                writeCoreConfig("RightClick", value.ToString());
+            }
+        }
+
         public int HotKeyCode
         {
             get
