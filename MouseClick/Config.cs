@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace MouseClick
 {
-    public class Config
+    public class Config : NotifyingEntity
     {
         public readonly static string AppRoot = AppDomain.CurrentDomain.BaseDirectory;
         public readonly string ConfigFile = Path.Combine(AppRoot, "config.ini");
@@ -31,10 +31,16 @@ namespace MouseClick
         {
             get
             {
-                return int.Parse(getCoreConfig("ClickCounts"));
+                if (!ContainsProperty())
+                {
+                    var val = int.Parse(getCoreConfig("ClickCounts"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<int>();
             }
             set
             {
+                SetValueWithNotify(value);
                 writeCoreConfig("ClickCounts", value.ToString());
             }
         }
@@ -43,10 +49,16 @@ namespace MouseClick
         {
             get
             {
-                return bool.Parse(getCoreConfig("UseRa2olStyle"));
+                if (!ContainsProperty())
+                {
+                    var val = bool.Parse(getCoreConfig("UseRa2olStyle"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<bool>();
             }
             set
             {
+                SetValueWithNotify(value);
                 writeCoreConfig("UseRa2olStyle", value.ToString());
             }
         }
@@ -55,10 +67,16 @@ namespace MouseClick
         {
             get
             {
-                return bool.Parse(getCoreConfig("LeftClick"));
+                if (!ContainsProperty())
+                {
+                    var val = bool.Parse(getCoreConfig("LeftClick"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<bool>();
             }
             set
             {
+                SetValueWithNotify(value);
                 writeCoreConfig("LeftClick", value.ToString());
             }
         }
@@ -67,10 +85,16 @@ namespace MouseClick
         {
             get
             {
-                return bool.Parse(getCoreConfig("RightClick"));
+                if (!ContainsProperty())
+                {
+                    var val = bool.Parse(getCoreConfig("RightClick"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<bool>();
             }
             set
             {
+                SetValueWithNotify(value);
                 writeCoreConfig("RightClick", value.ToString());
             }
         }
@@ -79,10 +103,16 @@ namespace MouseClick
         {
             get
             {
-                return int.Parse(getCoreConfig("HotKeyCode"));
+                if (!ContainsProperty())
+                {
+                    var val = int.Parse(getCoreConfig("HotKeyCode"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<int>();
             }
             set
             {
+                SetValueWithNotify(value);
                 writeCoreConfig("HotKeyCode", value.ToString());
             }
         }
@@ -91,10 +121,16 @@ namespace MouseClick
         {
             get
             {
-                return int.Parse(getCoreConfig("ClickInterval"));
+                if (!ContainsProperty())
+                {
+                    var val = int.Parse(getCoreConfig("ClickInterval"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<int>();
             }
             set
             {
+                SetValueWithNotify(value);
                 writeCoreConfig("ClickInterval", value.ToString());
             }
         }
@@ -103,10 +139,16 @@ namespace MouseClick
         {
             get
             {
-                return getCoreConfig("TextEditor");
+                if (!ContainsProperty())
+                {
+                    var val = getCoreConfig("TextEditor");
+                    SetValueWithNotify(val);
+                }
+                return GetValue<string>();
             }
             set
             {
+                SetValueWithNotify(value);
                 writeCoreConfig("TextEditor", value);
             }
         }
@@ -117,7 +159,12 @@ namespace MouseClick
             {
                 try
                 {
-                    return getCoreConfig("Author");
+                    if (!ContainsProperty())
+                    {
+                        var val = getCoreConfig("Author");
+                        SetValueWithNotify(val);
+                    }
+                    return GetValue<string>();
                 }
                 catch
                 {
@@ -126,6 +173,7 @@ namespace MouseClick
             }
             set
             {
+                SetValueWithNotify(value);
                 writeCoreConfig("Author", value);
             }
         }
@@ -134,10 +182,16 @@ namespace MouseClick
         {
             get
             {
-                return bool.Parse(getRa2Config("EnableRa2Mode"));
+                if (!ContainsProperty())
+                {
+                    var val = bool.Parse(getRa2Config("EnableRa2Mode"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<bool>();
             }
             set
             {
+                SetValueWithNotify(value);
                 writeRa2Config("EnableRa2Mode", value.ToString());
             }
         }
@@ -146,10 +200,16 @@ namespace MouseClick
         {
             get
             {
-                return int.Parse(getRa2Config("ConstructionBarWidth"));
+                if (!ContainsProperty())
+                {
+                    var val = int.Parse(getRa2Config("ConstructionBarWidth"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<int>();
             }
             set
             {
+                SetValueWithNotify(value);
                 writeRa2Config("ConstructionBarWidth", value.ToString());
             }
         }
@@ -160,7 +220,12 @@ namespace MouseClick
             {
                 try
                 {
-                    return int.Parse(getRa2Config("ScreenWidth"));
+                    if (!ContainsProperty())
+                    {
+                        var val = int.Parse(getRa2Config("ScreenWidth"));
+                        SetValueWithNotify(val);
+                    }
+                    return GetValue<int>();
                 }
                 catch
                 {
@@ -169,6 +234,7 @@ namespace MouseClick
             }
             set
             {
+                SetValueWithNotify(value);
                 writeRa2Config("ScreenWidth", value.ToString());
             }
         }
@@ -177,10 +243,16 @@ namespace MouseClick
         {
             get
             {
-                return bool.Parse(getRa2Config("AutoDetectMode"));
+                if (!ContainsProperty())
+                {
+                    var val = bool.Parse(getRa2Config("AutoDetectMode"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<bool>();
             }
             set
             {
+                SetValueWithNotify(value);
                 writeRa2Config("AutoDetectMode", value.ToString());
             }
         }
@@ -191,7 +263,12 @@ namespace MouseClick
             {
                 try
                 {
-                    return int.Parse(getRa2Config("AutoDetectInterval"));
+                    if (!ContainsProperty())
+                    {
+                        var val = int.Parse(getRa2Config("AutoDetectInterval"));
+                        SetValueWithNotify(val);
+                    }
+                    return GetValue<int>();
                 }
                 catch
                 {
@@ -200,6 +277,7 @@ namespace MouseClick
             }
             set
             {
+                SetValueWithNotify(value);
                 writeRa2Config("AutoDetectInterval", value.ToString());
             }
         }
@@ -210,7 +288,12 @@ namespace MouseClick
             {
                 try
                 {
-                    return getRa2Config("GameProcessFileName");
+                    if (!ContainsProperty())
+                    {
+                        var val = getRa2Config("GameProcessFileName");
+                        SetValueWithNotify(val);
+                    }
+                    return GetValue<string>();
                 }
                 catch
                 {
@@ -219,6 +302,7 @@ namespace MouseClick
             }
             set
             {
+                SetValueWithNotify(value);
                 writeRa2Config("GameProcessFileName", value);
             }
         }
