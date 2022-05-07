@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace MouseClick
 {
-    public partial class Form1 : Form
+    public partial class Form1
     {
         private readonly string logFileDir = "log";
 
@@ -31,8 +31,11 @@ namespace MouseClick
 
             if (Config.AutoDetectMode)
             {
-                checkBox2.Checked = true;
+                materialSwitch2.Checked = true;
             }
+            materialSlider1.Value = Config.ClickCounts;
+            leftClickSwitch.Checked = Config.LeftClick;
+            rightClickSwitch.Checked = Config.RightClick;
         }
     }
 }

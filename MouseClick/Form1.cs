@@ -13,10 +13,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gma.System.MouseKeyHook;
 using log4net;
+using MaterialSkin.Controls;
 
 namespace MouseClick
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MaterialForm
     {
         public static readonly ILog LogDebug = LogManager.GetLogger("MC.DEBUG");
         public static readonly ILog LogInfo = LogManager.GetLogger("MC.INFO");
@@ -28,8 +29,6 @@ namespace MouseClick
 
         private bool clicking = false;
         private bool shiftDown = false;
-
-        private bool clickOn = false;
 
         private List<string> gameProcessList;
 
@@ -80,13 +79,6 @@ namespace MouseClick
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //if ("lenchu".Equals(Config.Author))
-            //{
-            //    this.Text = $"{this.Text} by lenchu";
-            //}
-
-            //Subscribe();
-            //button2.Text = Config.ClickingOnLabel;
             this.switchClickStatus();
 
             initialize();
@@ -202,15 +194,6 @@ namespace MouseClick
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //if (Config.ClickingOnLabel.Equals(button2.Text))
-            //{
-            //    UnSubscribe();
-            //    button2.Text = Config.ClickingOffLabel;
-            //} else if (Config.ClickingOffLabel.Equals(button2.Text))
-            //{
-            //    Subscribe();
-            //    button2.Text = Config.ClickingOnLabel;
-            //}
             switchClickStatus();
         }
 
@@ -219,17 +202,7 @@ namespace MouseClick
         /// </summary>
         private void switchClickStatus()
         {
-            if (this.clickOn)
-            {
-                UnSubscribe();
-                button2.Text = Config.ClickingOffLabel;
-            }
-            else
-            {
-                Subscribe();
-                button2.Text = Config.ClickingOnLabel;
-            }
-            this.clickOn = !this.clickOn;
+            materialSwitch1.Checked = !materialSwitch1.Checked;
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -249,17 +222,29 @@ namespace MouseClick
             }
         }
 
+        private void materialSwitch1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (materialSwitch1.Checked)
+            {
+                Subscribe();
+            }
+            else
+            {
+                UnSubscribe();
+            }
+        }
+
         private System.Threading.Timer autoDetectTimer;
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            Config.AutoDetectMode = checkBox2.Checked;
+            Config.AutoDetectMode = materialSwitch2.Checked;
             // 自动探测模式
-            if (checkBox2.Checked)
+            if (materialSwitch2.Checked)
             {
                 autoDetectTimer = new System.Threading.Timer((state) =>
                 {
-                    if (this.gameProcessExists() && !this.clickOn)
+                    if (this.gameProcessExists() && !materialSwitch1.Checked)
                     {
                         // 游戏进程存在且没有开启连点，则开启连点
                         log.Info("检测到游戏进程 且 连点没有开启，开启连点");
@@ -267,7 +252,7 @@ namespace MouseClick
                             switchClickStatus();
                         }));
                     }
-                    else if (!this.gameProcessExists() && this.clickOn)
+                    else if (!this.gameProcessExists() && materialSwitch1.Checked)
                     {
                         // 游戏进程不存在且开启了连点，则关闭连点
                         log.Info("检测不到游戏进程 且 连点仍然开启，关闭连点");
@@ -279,7 +264,8 @@ namespace MouseClick
             }
             else
             {
-                autoDetectTimer.Dispose();
+                if (autoDetectTimer != null)
+                    autoDetectTimer.Dispose();
                 autoDetectTimer = null;
             }
         }
@@ -308,6 +294,26 @@ namespace MouseClick
         {
             // 解释 Debug模式
             MessageBox.Show("Debug模式下，将会输出更详细的日志，以便开发者快速定位bug，软件可以正常使用时无需开启此模式", "提示");
+        }
+
+        /// <summary>
+        /// 连点次数设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="newValue"></param>
+        private void materialSlider1_onValueChanged(object sender, int newValue)
+        {
+            Config.ClickCounts = newValue;
+        }
+
+        private void leftClickSwitch_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.LeftClick = leftClickSwitch.Checked;
+        }
+
+        private void rightClickSwitch_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.RightClick = rightClickSwitch.Checked;
         }
     }
 }
