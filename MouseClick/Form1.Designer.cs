@@ -193,6 +193,7 @@
             // 
             // materialSlider1
             // 
+            this.materialSlider1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSlider1.Depth = 0;
             this.materialSlider1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialSlider1.Location = new System.Drawing.Point(18, 159);

@@ -300,6 +300,56 @@ namespace MouseClick
             }
         }
 
+        public string GameProcessSeparator
+        {
+            get
+            {
+                try
+                {
+                    if (!ContainsProperty())
+                    {
+                        var val = getRa2Config("GameProcessSeparator");
+                        SetValueWithNotify(val);
+                    }
+                    return GetValue<string>();
+                }
+                catch
+                {
+                    return "|";
+                }
+            }
+            set
+            {
+                SetValueWithNotify(value);
+                writeRa2Config("GameProcessSeparator", value);
+            }
+        }
+
+        public string GameProcessList
+        {
+            get
+            {
+                try
+                {
+                    if (!ContainsProperty())
+                    {
+                        var val = getRa2Config("GameProcessList");
+                        SetValueWithNotify(val);
+                    }
+                    return GetValue<string>();
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+            set
+            {
+                SetValueWithNotify(value);
+                writeRa2Config("GameProcessList", value);
+            }
+        }
+
         private bool writeCoreConfig(string key, string value)
         {
             return writeConfig("core", key, value);

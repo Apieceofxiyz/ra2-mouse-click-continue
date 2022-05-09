@@ -30,7 +30,7 @@ namespace MouseClick
         private bool clicking = false;
         private bool shiftDown = false;
 
-        private List<string> gameProcessList;
+        private HashSet<string> gameProcessList;
 
         public Form1()
         {

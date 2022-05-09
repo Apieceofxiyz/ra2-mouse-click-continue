@@ -18,14 +18,31 @@ namespace MouseClick
             Directory.CreateDirectory(Path.Combine(Config.AppRoot, logFileDir));
 
             // 初始化 gameProcessList
-            string[] gameProcesses =
-                File.ReadAllLines(Path.Combine(Config.AppRoot, Config.GameProcessFileName));
-            gameProcessList = new List<string>();
-            foreach (var gp in gameProcesses)
+            gameProcessList = new HashSet<string>();
+
+            string gameProcessFileFullPath = Path.Combine(Config.AppRoot, Config.GameProcessFileName);
+            if (File.Exists(gameProcessFileFullPath))
             {
-                if (!string.IsNullOrEmpty(gp))
+                string[] gameProcesses =
+                    File.ReadAllLines(gameProcessFileFullPath);
+                foreach (var gp in gameProcesses)
                 {
-                    gameProcessList.Add(gp);
+                    if (!string.IsNullOrEmpty(gp))
+                    {
+                        gameProcessList.Add(gp);
+                    }
+                }
+            }
+            {
+                var gameProcesses = Config.GameProcessList.Split(new string[] { Config.GameProcessSeparator },
+                    StringSplitOptions.RemoveEmptyEntries);
+                foreach (var gp in gameProcesses)
+                {
+                    var finalGp = gp.Trim();
+                    if (!string.IsNullOrEmpty(finalGp))
+                    {
+                        gameProcessList.Add(finalGp);
+                    }
                 }
             }
 
