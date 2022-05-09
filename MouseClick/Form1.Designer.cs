@@ -43,6 +43,9 @@
             this.materialSwitch2 = new MaterialSkin.Controls.MaterialSwitch();
             this.leftClickSwitch = new MaterialSkin.Controls.MaterialSwitch();
             this.rightClickSwitch = new MaterialSkin.Controls.MaterialSwitch();
+            this.materialRadioButton1 = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialRadioButton2 = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialRadioButton3 = new MaterialSkin.Controls.MaterialRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -175,12 +178,12 @@
             this.materialButton1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.materialButton1.HighEmphasis = true;
             this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(14, 257);
+            this.materialButton1.Location = new System.Drawing.Point(11, 301);
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
             this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(259, 36);
+            this.materialButton1.Size = new System.Drawing.Size(280, 36);
             this.materialButton1.TabIndex = 12;
             this.materialButton1.Text = "更 多 设 置 ( 需 要 重 启 )";
             this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -253,11 +256,65 @@
             this.rightClickSwitch.UseVisualStyleBackColor = true;
             this.rightClickSwitch.CheckedChanged += new System.EventHandler(this.rightClickSwitch_CheckedChanged);
             // 
+            // materialRadioButton1
+            // 
+            this.materialRadioButton1.AutoSize = true;
+            this.materialRadioButton1.Depth = 0;
+            this.materialRadioButton1.Location = new System.Drawing.Point(8, 251);
+            this.materialRadioButton1.Margin = new System.Windows.Forms.Padding(0);
+            this.materialRadioButton1.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRadioButton1.Name = "materialRadioButton1";
+            this.materialRadioButton1.Ripple = true;
+            this.materialRadioButton1.Size = new System.Drawing.Size(101, 37);
+            this.materialRadioButton1.TabIndex = 35;
+            this.materialRadioButton1.TabStop = true;
+            this.materialRadioButton1.Text = "Shift连点";
+            this.materialRadioButton1.UseVisualStyleBackColor = true;
+            this.materialRadioButton1.Click += new System.EventHandler(this.materialRadioButton1_Clicked);
+            // 
+            // materialRadioButton2
+            // 
+            this.materialRadioButton2.AutoSize = true;
+            this.materialRadioButton2.Depth = 0;
+            this.materialRadioButton2.Location = new System.Drawing.Point(108, 251);
+            this.materialRadioButton2.Margin = new System.Windows.Forms.Padding(0);
+            this.materialRadioButton2.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRadioButton2.Name = "materialRadioButton2";
+            this.materialRadioButton2.Ripple = true;
+            this.materialRadioButton2.Size = new System.Drawing.Size(86, 37);
+            this.materialRadioButton2.TabIndex = 36;
+            this.materialRadioButton2.TabStop = true;
+            this.materialRadioButton2.Text = "Alt连点";
+            this.materialRadioButton2.UseVisualStyleBackColor = true;
+            this.materialRadioButton2.Click += new System.EventHandler(this.materialRadioButton1_Clicked);
+            // 
+            // materialRadioButton3
+            // 
+            this.materialRadioButton3.AutoSize = true;
+            this.materialRadioButton3.Depth = 0;
+            this.materialRadioButton3.Location = new System.Drawing.Point(195, 251);
+            this.materialRadioButton3.Margin = new System.Windows.Forms.Padding(0);
+            this.materialRadioButton3.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialRadioButton3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialRadioButton3.Name = "materialRadioButton3";
+            this.materialRadioButton3.Ripple = true;
+            this.materialRadioButton3.Size = new System.Drawing.Size(91, 37);
+            this.materialRadioButton3.TabIndex = 37;
+            this.materialRadioButton3.TabStop = true;
+            this.materialRadioButton3.Text = "Ctrl连点";
+            this.materialRadioButton3.UseVisualStyleBackColor = true;
+            this.materialRadioButton3.Click += new System.EventHandler(this.materialRadioButton1_Clicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(289, 353);
+            this.ClientSize = new System.Drawing.Size(300, 353);
+            this.Controls.Add(this.materialRadioButton3);
+            this.Controls.Add(this.materialRadioButton2);
+            this.Controls.Add(this.materialRadioButton1);
             this.Controls.Add(this.rightClickSwitch);
             this.Controls.Add(this.leftClickSwitch);
             this.Controls.Add(this.materialSwitch2);
@@ -275,8 +332,8 @@
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(289, 353);
-            this.MinimumSize = new System.Drawing.Size(289, 353);
+            this.MaximumSize = new System.Drawing.Size(300, 353);
+            this.MinimumSize = new System.Drawing.Size(300, 353);
             this.Name = "Form1";
             this.Sizable = false;
             this.Text = "鼠标连点器(Ra2定制版)";
@@ -304,6 +361,9 @@
         private MaterialSkin.Controls.MaterialSwitch materialSwitch2;
         private MaterialSkin.Controls.MaterialSwitch leftClickSwitch;
         private MaterialSkin.Controls.MaterialSwitch rightClickSwitch;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton1;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
+        private MaterialSkin.Controls.MaterialRadioButton materialRadioButton3;
     }
 }
 

@@ -314,5 +314,21 @@ namespace MouseClick
         {
             Config.RightClick = rightClickSwitch.Checked;
         }
+
+        private void materialRadioButton1_Clicked(object sender, EventArgs e)
+        {
+            if (materialRadioButton1.Checked)
+            {
+                Config.HotKeyCode = (int)Keys.LShiftKey;
+            }
+            else if (materialRadioButton2.Checked)
+            {
+                Config.HotKeyCode = (int)Keys.LMenu;
+            }
+            else if (materialRadioButton3.Checked)
+            {
+                Config.HotKeyCode = (int)Keys.LControlKey;
+            }
+        }
     }
 }

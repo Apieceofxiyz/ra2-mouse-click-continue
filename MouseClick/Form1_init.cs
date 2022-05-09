@@ -37,6 +37,20 @@ namespace MouseClick
             leftClickSwitch.Checked = Config.LeftClick;
             rightClickSwitch.Checked = Config.RightClick;
             materialSwitch1.Checked = Config.ClickOn;
+            switch (Config.HotKeyCode)
+            {
+                case 160:
+                    materialRadioButton1.Checked = true;
+                    break;
+                case 162:
+                    materialRadioButton3.Checked = true;
+                    break;
+                case 164:
+                    materialRadioButton2.Checked = true;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
