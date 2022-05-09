@@ -317,17 +317,23 @@ namespace MouseClick
 
         private void materialRadioButton1_Clicked(object sender, EventArgs e)
         {
+            int hotKeyCode = Config.HotKeyCode;
             if (materialRadioButton1.Checked)
             {
-                Config.HotKeyCode = (int)Keys.LShiftKey;
+                hotKeyCode = (int)Keys.LShiftKey;
             }
             else if (materialRadioButton2.Checked)
             {
-                Config.HotKeyCode = (int)Keys.LMenu;
+                hotKeyCode = (int)Keys.LMenu;
             }
             else if (materialRadioButton3.Checked)
             {
-                Config.HotKeyCode = (int)Keys.LControlKey;
+                hotKeyCode = (int)Keys.LControlKey;
+            }
+
+            if (Config.HotKeyCode != hotKeyCode)
+            {
+                Config.HotKeyCode = hotKeyCode;
             }
         }
     }

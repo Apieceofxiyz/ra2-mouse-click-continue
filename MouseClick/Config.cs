@@ -171,31 +171,6 @@ namespace MouseClick
             }
         }
 
-        public string Author
-        {
-            get
-            {
-                try
-                {
-                    if (!ContainsProperty())
-                    {
-                        var val = getCoreConfig("Author");
-                        SetValueWithNotify(val);
-                    }
-                    return GetValue<string>();
-                }
-                catch
-                {
-                    return "";
-                }
-            }
-            set
-            {
-                SetValueWithNotify(value);
-                writeCoreConfig("Author", value);
-            }
-        }
-
         public bool EnableRa2Mode
         {
             get
