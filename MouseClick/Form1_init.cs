@@ -36,6 +36,7 @@ namespace MouseClick
             materialSlider1.Value = Config.ClickCounts;
             leftClickSwitch.Checked = Config.LeftClick;
             rightClickSwitch.Checked = Config.RightClick;
+            materialSwitch1.Checked = Config.ClickOn;
         }
     }
 }

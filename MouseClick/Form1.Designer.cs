@@ -257,7 +257,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 263);
+            this.ClientSize = new System.Drawing.Size(289, 353);
             this.Controls.Add(this.rightClickSwitch);
             this.Controls.Add(this.leftClickSwitch);
             this.Controls.Add(this.materialSwitch2);
@@ -275,6 +275,8 @@
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(289, 353);
+            this.MinimumSize = new System.Drawing.Size(289, 353);
             this.Name = "Form1";
             this.Sizable = false;
             this.Text = "鼠标连点器(Ra2定制版)";

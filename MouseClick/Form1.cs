@@ -79,8 +79,6 @@ namespace MouseClick
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.switchClickStatus();
-
             initialize();
         }
 
@@ -232,6 +230,7 @@ namespace MouseClick
             {
                 UnSubscribe();
             }
+            Config.ClickOn = materialSwitch1.Checked;
         }
 
         private System.Threading.Timer autoDetectTimer;

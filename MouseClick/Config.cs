@@ -27,6 +27,24 @@ namespace MouseClick
             }
         }
 
+        public bool ClickOn
+        {
+            get
+            {
+                if (!ContainsProperty())
+                {
+                    var val = bool.Parse(getCoreConfig("ClickOn"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<bool>();
+            }
+            set
+            {
+                SetValueWithNotify(value);
+                writeCoreConfig("ClickOn", value.ToString());
+            }
+        }
+
         public int ClickCounts
         {
             get
