@@ -250,6 +250,24 @@ namespace MouseClick
             }
         }
 
+        public bool AutoDetectAres
+        {
+            get
+            {
+                if (!ContainsProperty())
+                {
+                    var val = bool.Parse(getRa2Config("AutoDetectAres"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<bool>();
+            }
+            set
+            {
+                SetValueWithNotify(value);
+                writeRa2Config("AutoDetectAres", value.ToString());
+            }
+        }
+
         public int AutoDetectInterval
         {
             get
@@ -300,6 +318,31 @@ namespace MouseClick
             }
         }
 
+        public string AresProcessFileName
+        {
+            get
+            {
+                try
+                {
+                    if (!ContainsProperty())
+                    {
+                        var val = getRa2Config("AresProcessFileName");
+                        SetValueWithNotify(val);
+                    }
+                    return GetValue<string>();
+                }
+                catch
+                {
+                    return "ares-processes.txt";
+                }
+            }
+            set
+            {
+                SetValueWithNotify(value);
+                writeRa2Config("AresProcessFileName", value);
+            }
+        }
+
         public string GameProcessSeparator
         {
             get
@@ -325,6 +368,31 @@ namespace MouseClick
             }
         }
 
+        public string AresProcessSeparator
+        {
+            get
+            {
+                try
+                {
+                    if (!ContainsProperty())
+                    {
+                        var val = getRa2Config("AresProcessSeparator");
+                        SetValueWithNotify(val);
+                    }
+                    return GetValue<string>();
+                }
+                catch
+                {
+                    return "|";
+                }
+            }
+            set
+            {
+                SetValueWithNotify(value);
+                writeRa2Config("AresProcessSeparator", value);
+            }
+        }
+
         public string GameProcessList
         {
             get
@@ -347,6 +415,31 @@ namespace MouseClick
             {
                 SetValueWithNotify(value);
                 writeRa2Config("GameProcessList", value);
+            }
+        }
+
+        public string AresProcessList
+        {
+            get
+            {
+                try
+                {
+                    if (!ContainsProperty())
+                    {
+                        var val = getRa2Config("AresProcessList");
+                        SetValueWithNotify(val);
+                    }
+                    return GetValue<string>();
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+            set
+            {
+                SetValueWithNotify(value);
+                writeRa2Config("AresProcessList", value);
             }
         }
 

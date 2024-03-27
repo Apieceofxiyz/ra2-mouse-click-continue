@@ -13,12 +13,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Gma.System.MouseKeyHook;
 using log4net;
+using MaterialSkin;
 using MaterialSkin.Controls;
 
 namespace MouseClick
 {
     public partial class Form1 : MaterialForm
     {
+        private readonly MaterialSkinManager materialSkinManager;
         public static readonly ILog LogDebug = LogManager.GetLogger("MC.DEBUG");
         public static readonly ILog LogInfo = LogManager.GetLogger("MC.INFO");
 
@@ -30,19 +32,33 @@ namespace MouseClick
         private bool clicking = false;
         private bool shiftDown = false;
 
+        private bool flag_ares = false;
+
         private HashSet<string> gameProcessList;
+        private HashSet<string> aresProcessList;
 
         public Form1()
         {
             InitializeComponent();
             this.FormClosing += Form1_FormClosing;
+            //InitializeComponent();
+            materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.EnforceBackcolorOnAllComponents = true;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(
+                       Primary.LightBlue600,
+                       Primary.LightBlue800,
+                       Primary.LightBlue300,
+                       Accent.Red100,
+                       TextShade.WHITE);
         }
 
         private void UnSubscribe()
         {
             try
             {
-                log.Info("try to unSubscribe");
+                //log.Info("try to unSubscribe");
                 KMEvents.KeyDown -= KMEvents_KeyDown;
                 KMEvents.KeyUp -= KMEvents_KeyUp;
                 KMEvents.MouseDown -= KMEvents_MouseClick;
@@ -50,25 +66,27 @@ namespace MouseClick
                 KMEvents.Dispose();
                 KMEvents = null;
             } catch(Exception e) {
-                log.Error("UnSubscribe failed", e);
+                //log.Error("UnSubscribe failed", e);
+                ;
             }
-            log.Info("UnSubscribe success");
+            //log.Info("UnSubscribe success");
         }
 
         private void Subscribe()
         {
             try
             {
-                log.Info("try to subscribe");
+                //log.Info("try to subscribe");
                 KMEvents = Hook.GlobalEvents();
                 KMEvents.KeyDown += KMEvents_KeyDown;
                 KMEvents.KeyUp += KMEvents_KeyUp;
                 KMEvents.MouseDown += KMEvents_MouseClick;
             } catch (Exception e)
             {
-                log.Error("Subscribe failed", e);
+                //log.Error("Subscribe failed", e);
+                ;
             }
-            log.Info("Subscribe success");
+            //log.Info("Subscribe success");
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -86,12 +104,12 @@ namespace MouseClick
         {
             if (Config.LeftClick && e.Button == MouseButtons.Left)
             {
-                log.Debug($"鼠标左键点击了: ({e.X},{e.Y})位置");
+                //log.Debug($"鼠标左键点击了: ({e.X},{e.Y})位置");
                 mouseClicked(e.X, e.Y);
             }
             if (Config.RightClick && e.Button == MouseButtons.Right)
             {
-                log.Debug($"鼠标右键点击了: ({e.X},{e.Y})位置");
+                //log.Debug($"鼠标右键点击了: ({e.X},{e.Y})位置");
                 mouseClicked(e.X, e.Y, MouseButtons.Right);
             }
         }
@@ -112,11 +130,17 @@ namespace MouseClick
         {
             if (clicking)
             {
-                log.Debug("正在连点中，忽略本次连点");
+                //log.Debug("正在连点中，忽略本次连点");
                 return;
             }
             if (shiftDown && shouldClick(x, y))
-                multipleClickMouse(Config.ClickCounts, mouseButton);
+            {
+                if(!materialSwitch3.Checked || !flag_ares)
+                    multipleClickMouse(Config.ClickCounts-1, mouseButton);
+                else
+                    multipleClickMouse(Config.ClickCounts/5-1, mouseButton);
+            }
+                
         }
 
         private void multipleClickMouse(int counts, MouseButtons mouseButton = MouseButtons.Left)
@@ -124,7 +148,7 @@ namespace MouseClick
             clicking = true;
             Task.Run(() =>
             {
-                log.Info($"开始连点({mouseButton.ToString()}): ({Cursor.Position.X},{Cursor.Position.Y})");
+                //log.Info($"开始连点({mouseButton.ToString()}): ({Cursor.Position.X},{Cursor.Position.Y})");
                 int i = 0;
                 for (i = 0; i < counts; i++)
                 {
@@ -133,13 +157,13 @@ namespace MouseClick
                 }
                 clicking = false;
                 shiftDown = false;
-                log.Info($"连点结束, 本次连点点击了{counts}次");
+                //log.Info($"连点结束, 本次连点点击了{counts}次");
             });
         }
 
         private void KMEvents_KeyUp(object sender, KeyEventArgs e)
         {
-            log.Debug($"{e.KeyCode} 键被松开");
+            //log.Debug($"{e.KeyCode} 键被松开");
             if (Config.UseRa2olStyle)
             {
                 if ((int)e.KeyCode == Config.HotKeyCode)
@@ -151,7 +175,7 @@ namespace MouseClick
 
         private void KMEvents_KeyDown(object sender, KeyEventArgs e)
         {
-            log.Debug($"{e.KeyCode} 键被按下");
+            //log.Debug($"{e.KeyCode} 键被按下");
             if (Config.UseRa2olStyle)
             {
                 if ((int)e.KeyCode == Config.HotKeyCode)
@@ -234,6 +258,7 @@ namespace MouseClick
         }
 
         private System.Threading.Timer autoDetectTimer;
+        private System.Threading.Timer autoDetectAresTimer;
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
@@ -246,17 +271,19 @@ namespace MouseClick
                     if (this.gameProcessExists() && !materialSwitch1.Checked)
                     {
                         // 游戏进程存在且没有开启连点，则开启连点
-                        log.Info("检测到游戏进程 且 连点没有开启，开启连点");
-                        this.ActiveControl.BeginInvoke(new Action(() => {
-                            switchClickStatus();
-                        }));
+                        //log.Info("检测到游戏进程 且 连点没有开启，开启连点");
+                            this.ActiveControl.BeginInvoke(new Action(() => {
+                                //switchClickStatus();
+                                materialSwitch1.Checked = true;
+                            }));
                     }
                     else if (!this.gameProcessExists() && materialSwitch1.Checked)
                     {
                         // 游戏进程不存在且开启了连点，则关闭连点
-                        log.Info("检测不到游戏进程 且 连点仍然开启，关闭连点");
+                        //log.Info("检测不到游戏进程 且 连点仍然开启，关闭连点");
                         this.ActiveControl.BeginInvoke(new Action(() => {
-                            switchClickStatus();
+                            //switchClickStatus();
+                            materialSwitch1.Checked = false;
                         }));
                     }
                 }, null, Config.AutoDetectInterval, Config.AutoDetectInterval);
@@ -266,6 +293,36 @@ namespace MouseClick
                 if (autoDetectTimer != null)
                     autoDetectTimer.Dispose();
                 autoDetectTimer = null;
+            }
+        }
+
+        private void materialSwitch3_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.AutoDetectAres = materialSwitch3.Checked;
+            // 自动探测Ares
+            if (materialSwitch3.Checked)
+            {
+                autoDetectAresTimer = new System.Threading.Timer((state) =>
+                {
+                    if (this.aresProcessExists() && materialSwitch3.Checked)
+                    {
+                        // Ares进程存在，自动判断Ares开启
+                        //log.Info("检测到Ares");
+                        flag_ares = true;
+                    }
+                    else if (!this.gameProcessExists() && materialSwitch3.Checked)
+                    {
+                        // Ares进程不存在，自动判断Ares开启
+                        //log.Info("检测不到Ares");
+                        flag_ares = false;
+                    }
+                }, null, Config.AutoDetectInterval, Config.AutoDetectInterval);
+            }
+            else
+            {
+                if (autoDetectAresTimer != null)
+                    autoDetectAresTimer.Dispose();
+                autoDetectAresTimer = null;
             }
         }
 
@@ -279,6 +336,18 @@ namespace MouseClick
             }
             return count > 0;
         }
+
+        private bool aresProcessExists()
+        {
+            int count = 0;
+            foreach (string gp in aresProcessList)
+            {
+                Process[] processes = Process.GetProcessesByName(gp);
+                count += processes.Length;
+            }
+            return count > 0;
+        }
+
 
         [DllImport("user32.dll", EntryPoint = "FindWindow", SetLastError = true)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);

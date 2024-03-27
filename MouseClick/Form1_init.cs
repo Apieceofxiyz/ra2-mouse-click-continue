@@ -17,10 +17,12 @@ namespace MouseClick
             // 创建日志文件夹
             Directory.CreateDirectory(Path.Combine(Config.AppRoot, logFileDir));
 
-            // 初始化 gameProcessList
+            // 初始化 gameProcessList 和 aresProcessList
             gameProcessList = new HashSet<string>();
+            aresProcessList = new HashSet<string>();
 
             string gameProcessFileFullPath = Path.Combine(Config.AppRoot, Config.GameProcessFileName);
+            string aresProcessFileFullPath = Path.Combine(Config.AppRoot, Config.AresProcessFileName);
             if (File.Exists(gameProcessFileFullPath))
             {
                 string[] gameProcesses =
@@ -45,11 +47,41 @@ namespace MouseClick
                     }
                 }
             }
+            if (File.Exists(aresProcessFileFullPath))
+            {
+                string[] aresProcesses =
+                    File.ReadAllLines(aresProcessFileFullPath);
+                foreach (var gp in aresProcesses)
+                {
+                    if (!string.IsNullOrEmpty(gp))
+                    {
+                        aresProcessList.Add(gp);
+                    }
+                }
+            }
+            {
+                var aresProcesses = Config.AresProcessList.Split(new string[] { Config.AresProcessSeparator },
+                    StringSplitOptions.RemoveEmptyEntries);
+                foreach (var gp in aresProcesses)
+                {
+                    var finalGp = gp.Trim();
+                    if (!string.IsNullOrEmpty(finalGp))
+                    {
+                        aresProcessList.Add(finalGp);
+                    }
+                }
+            }
+
 
             if (Config.AutoDetectMode)
             {
                 materialSwitch2.Checked = true;
             }
+            if (Config.AutoDetectAres)
+            {
+                materialSwitch3.Checked = true;
+            }
+
             materialSlider1.Value = Config.ClickCounts;
             leftClickSwitch.Checked = Config.LeftClick;
             rightClickSwitch.Checked = Config.RightClick;

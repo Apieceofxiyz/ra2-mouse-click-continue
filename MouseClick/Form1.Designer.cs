@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -46,6 +47,7 @@
             this.materialRadioButton1 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialRadioButton2 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialRadioButton3 = new MaterialSkin.Controls.MaterialRadioButton();
+            this.materialSwitch3 = new MaterialSkin.Controls.MaterialSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,16 +155,15 @@
             // 
             // materialSwitch1
             // 
-            this.materialSwitch1.AutoSize = true;
             this.materialSwitch1.Depth = 0;
             this.materialSwitch1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.materialSwitch1.Location = new System.Drawing.Point(9, 76);
+            this.materialSwitch1.Location = new System.Drawing.Point(14, 82);
             this.materialSwitch1.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitch1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitch1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSwitch1.Name = "materialSwitch1";
             this.materialSwitch1.Ripple = true;
-            this.materialSwitch1.Size = new System.Drawing.Size(122, 37);
+            this.materialSwitch1.Size = new System.Drawing.Size(270, 24);
             this.materialSwitch1.TabIndex = 11;
             this.materialSwitch1.Text = "连点开关";
             this.materialSwitch1.UseVisualStyleBackColor = true;
@@ -178,7 +179,7 @@
             this.materialButton1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.materialButton1.HighEmphasis = true;
             this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(11, 301);
+            this.materialButton1.Location = new System.Drawing.Point(9, 292);
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
@@ -196,12 +197,12 @@
             this.materialSlider1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSlider1.Depth = 0;
             this.materialSlider1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialSlider1.Location = new System.Drawing.Point(18, 159);
+            this.materialSlider1.Location = new System.Drawing.Point(14, 172);
             this.materialSlider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSlider1.Name = "materialSlider1";
             this.materialSlider1.RangeMax = 30;
             this.materialSlider1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.materialSlider1.Size = new System.Drawing.Size(250, 40);
+            this.materialSlider1.Size = new System.Drawing.Size(270, 40);
             this.materialSlider1.TabIndex = 28;
             this.materialSlider1.Text = "连点次数";
             this.materialSlider1.Value = 10;
@@ -210,16 +211,15 @@
             // 
             // materialSwitch2
             // 
-            this.materialSwitch2.AutoSize = true;
             this.materialSwitch2.Depth = 0;
             this.materialSwitch2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.materialSwitch2.Location = new System.Drawing.Point(9, 118);
+            this.materialSwitch2.Location = new System.Drawing.Point(14, 112);
             this.materialSwitch2.Margin = new System.Windows.Forms.Padding(0);
             this.materialSwitch2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialSwitch2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSwitch2.Name = "materialSwitch2";
             this.materialSwitch2.Ripple = true;
-            this.materialSwitch2.Size = new System.Drawing.Size(186, 37);
+            this.materialSwitch2.Size = new System.Drawing.Size(275, 24);
             this.materialSwitch2.TabIndex = 32;
             this.materialSwitch2.Text = "自动检测游戏进程";
             this.materialSwitch2.UseVisualStyleBackColor = true;
@@ -227,15 +227,14 @@
             // 
             // leftClickSwitch
             // 
-            this.leftClickSwitch.AutoSize = true;
             this.leftClickSwitch.Depth = 0;
-            this.leftClickSwitch.Location = new System.Drawing.Point(9, 206);
+            this.leftClickSwitch.Location = new System.Drawing.Point(14, 222);
             this.leftClickSwitch.Margin = new System.Windows.Forms.Padding(0);
             this.leftClickSwitch.MouseLocation = new System.Drawing.Point(-1, -1);
             this.leftClickSwitch.MouseState = MaterialSkin.MouseState.HOVER;
             this.leftClickSwitch.Name = "leftClickSwitch";
             this.leftClickSwitch.Ripple = true;
-            this.leftClickSwitch.Size = new System.Drawing.Size(122, 37);
+            this.leftClickSwitch.Size = new System.Drawing.Size(122, 24);
             this.leftClickSwitch.TabIndex = 33;
             this.leftClickSwitch.Text = "左键连点";
             this.leftClickSwitch.UseVisualStyleBackColor = true;
@@ -243,25 +242,24 @@
             // 
             // rightClickSwitch
             // 
-            this.rightClickSwitch.AutoSize = true;
+            this.rightClickSwitch.BackColor = System.Drawing.SystemColors.Control;
             this.rightClickSwitch.Depth = 0;
-            this.rightClickSwitch.Location = new System.Drawing.Point(146, 206);
+            this.rightClickSwitch.Location = new System.Drawing.Point(162, 222);
             this.rightClickSwitch.Margin = new System.Windows.Forms.Padding(0);
             this.rightClickSwitch.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rightClickSwitch.MouseState = MaterialSkin.MouseState.HOVER;
             this.rightClickSwitch.Name = "rightClickSwitch";
             this.rightClickSwitch.Ripple = true;
-            this.rightClickSwitch.Size = new System.Drawing.Size(122, 37);
+            this.rightClickSwitch.Size = new System.Drawing.Size(122, 24);
             this.rightClickSwitch.TabIndex = 34;
             this.rightClickSwitch.Text = "右键连点";
-            this.rightClickSwitch.UseVisualStyleBackColor = true;
+            this.rightClickSwitch.UseVisualStyleBackColor = false;
             this.rightClickSwitch.CheckedChanged += new System.EventHandler(this.rightClickSwitch_CheckedChanged);
             // 
             // materialRadioButton1
             // 
-            this.materialRadioButton1.AutoSize = true;
             this.materialRadioButton1.Depth = 0;
-            this.materialRadioButton1.Location = new System.Drawing.Point(8, 251);
+            this.materialRadioButton1.Location = new System.Drawing.Point(6, 252);
             this.materialRadioButton1.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -276,9 +274,8 @@
             // 
             // materialRadioButton2
             // 
-            this.materialRadioButton2.AutoSize = true;
             this.materialRadioButton2.Depth = 0;
-            this.materialRadioButton2.Location = new System.Drawing.Point(108, 251);
+            this.materialRadioButton2.Location = new System.Drawing.Point(107, 252);
             this.materialRadioButton2.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
@@ -293,9 +290,8 @@
             // 
             // materialRadioButton3
             // 
-            this.materialRadioButton3.AutoSize = true;
             this.materialRadioButton3.Depth = 0;
-            this.materialRadioButton3.Location = new System.Drawing.Point(195, 251);
+            this.materialRadioButton3.Location = new System.Drawing.Point(193, 252);
             this.materialRadioButton3.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton3.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton3.MouseState = MaterialSkin.MouseState.HOVER;
@@ -308,11 +304,28 @@
             this.materialRadioButton3.UseVisualStyleBackColor = true;
             this.materialRadioButton3.Click += new System.EventHandler(this.materialRadioButton1_Clicked);
             // 
+            // materialSwitch3
+            // 
+            this.materialSwitch3.Depth = 0;
+            this.materialSwitch3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.materialSwitch3.Location = new System.Drawing.Point(14, 142);
+            this.materialSwitch3.Margin = new System.Windows.Forms.Padding(0);
+            this.materialSwitch3.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialSwitch3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSwitch3.Name = "materialSwitch3";
+            this.materialSwitch3.Ripple = true;
+            this.materialSwitch3.Size = new System.Drawing.Size(275, 24);
+            this.materialSwitch3.TabIndex = 38;
+            this.materialSwitch3.Text = "自动检测ARES环境";
+            this.materialSwitch3.UseVisualStyleBackColor = true;
+            this.materialSwitch3.CheckedChanged += new System.EventHandler(this.materialSwitch3_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 353);
+            this.ClientSize = new System.Drawing.Size(300, 340);
+            this.Controls.Add(this.materialSwitch3);
             this.Controls.Add(this.materialRadioButton3);
             this.Controls.Add(this.materialRadioButton2);
             this.Controls.Add(this.materialRadioButton1);
@@ -332,12 +345,13 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(300, 353);
-            this.MinimumSize = new System.Drawing.Size(300, 353);
+            this.MaximumSize = new System.Drawing.Size(300, 340);
+            this.MinimumSize = new System.Drawing.Size(300, 340);
             this.Name = "Form1";
             this.Sizable = false;
-            this.Text = "鼠标连点器(Ra2定制版)";
+            this.Text = "鼠标连点器 (Ra2定制版)";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
@@ -365,6 +379,7 @@
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton1;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton3;
+        private MaterialSkin.Controls.MaterialSwitch materialSwitch3;
     }
 }
 
