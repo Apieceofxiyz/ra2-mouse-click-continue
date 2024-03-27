@@ -310,7 +310,7 @@ namespace MouseClick
                         //log.Info("检测到Ares");
                         flag_ares = true;
                     }
-                    else if (!this.gameProcessExists() && materialSwitch3.Checked)
+                    else if (!this.aresProcessExists() && materialSwitch3.Checked)
                     {
                         // Ares进程不存在，自动判断Ares开启
                         //log.Info("检测不到Ares");
