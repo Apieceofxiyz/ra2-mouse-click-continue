@@ -268,6 +268,24 @@ namespace MouseClick
             }
         }
 
+        public bool KillProcessOn
+        {
+            get
+            {
+                if (!ContainsProperty())
+                {
+                    var val = bool.Parse(getRa2Config("KillProcessOn"));
+                    SetValueWithNotify(val);
+                }
+                return GetValue<bool>();
+            }
+            set
+            {
+                SetValueWithNotify(value);
+                writeRa2Config("KillProcessOn", value.ToString());
+            }
+        }
+
         public int AutoDetectInterval
         {
             get
@@ -440,6 +458,31 @@ namespace MouseClick
             {
                 SetValueWithNotify(value);
                 writeRa2Config("AresProcessList", value);
+            }
+        }
+
+        public string KillProcessHotkey
+        {
+            get
+            {
+                try
+                {
+                    if (!ContainsProperty())
+                    {
+                        var val = getRa2Config("KillProcessHotkey");
+                        SetValueWithNotify(val);
+                    }
+                    return GetValue<string>();
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+            set
+            {
+                SetValueWithNotify(value);
+                writeRa2Config("KillProcessHotkey", value);
             }
         }
 

@@ -22,6 +22,8 @@ https://github.com/Apieceofxiyz/ra2-mouse-click-continue
 	- 映射规则可自由配置，配置文件在 TC 版 plugins 目录下的 KeyMappings.txt 文件
 5. 支持识别Ares环境（自0.5版本起）
 	- 在识别到Ares环境时避免与Ares自带连点冲突（此时仅可连点5的整数倍）
+6. 支持快捷键杀死游戏（自0.6版本起）
+    - 用于处理偶尔游戏结束时黑屏卡死的问题
 
 #### 安装使用说明
 

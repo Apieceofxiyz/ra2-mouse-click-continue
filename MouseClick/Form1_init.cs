@@ -81,6 +81,10 @@ namespace MouseClick
             {
                 materialSwitch3.Checked = true;
             }
+            if (Config.KillProcessOn)
+            {
+                materialSwitch4.Checked = true;
+            }
 
             materialSlider1.Value = Config.ClickCounts;
             leftClickSwitch.Checked = Config.LeftClick;

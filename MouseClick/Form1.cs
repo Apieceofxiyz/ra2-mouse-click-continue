@@ -25,6 +25,9 @@ namespace MouseClick
         public static readonly ILog LogInfo = LogManager.GetLogger("MC.INFO");
 
         private IKeyboardMouseEvents KMEvents;
+        private IKeyboardMouseEvents KillEvents;
+        private List<Keys> KillKeys;
+        private String KillKeysString;
         private Config Config = new Config();
 
         private ILog log = LogInfo;
@@ -41,7 +44,6 @@ namespace MouseClick
         {
             InitializeComponent();
             this.FormClosing += Form1_FormClosing;
-            //InitializeComponent();
             materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.EnforceBackcolorOnAllComponents = true;
             materialSkinManager.AddFormToManage(this);
@@ -52,6 +54,7 @@ namespace MouseClick
                        Primary.LightBlue300,
                        Accent.Red100,
                        TextShade.WHITE);
+            KillKeysString= Config.KillProcessHotkey;
         }
 
         private void UnSubscribe()
@@ -87,6 +90,41 @@ namespace MouseClick
                 ;
             }
             //log.Info("Subscribe success");
+        }
+
+        private void KillSubscribe()
+        {
+            try
+            {
+                //log.Info("try to subscribe");
+                KillKeys = ParseHotkeyString(KillKeysString);
+                KillEvents = Hook.GlobalEvents();
+                KillEvents.KeyDown += KillEvents_KeyDown;
+            }
+            catch (Exception e)
+            {
+                //log.Error("Subscribe failed", e);
+                ;
+            }
+            //log.Info("Subscribe success");
+        }
+
+        private void KillUnSubscribe()
+        {
+            try
+            {
+                //log.Info("try to unSubscribe");
+                KillEvents.KeyDown -= KillEvents_KeyDown;
+
+                KillEvents.Dispose();
+                KillEvents = null;
+            }
+            catch (Exception e)
+            {
+                //log.Error("UnSubscribe failed", e);
+                ;
+            }
+            //log.Info("UnSubscribe success");
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -191,6 +229,72 @@ namespace MouseClick
             }
         }
 
+        private void KillEvents_KeyDown(object sender, KeyEventArgs e)
+        {
+            List<Keys> pressedKeys = new List<Keys>();
+
+            if (e.Control) pressedKeys.Add(Keys.Control);
+            if (e.Alt) pressedKeys.Add(Keys.Alt);
+            if (e.Shift) pressedKeys.Add(Keys.Shift);
+            pressedKeys.Add(e.KeyCode);
+
+            bool isHotkeyPressed = KillKeys.All(key => pressedKeys.Contains(key));
+
+            if (isHotkeyPressed)
+            {
+                //log.Info("杀进程热键匹配！");
+                KillGameProcesses();
+            }
+        }
+
+        public void KillGameProcesses()
+        {
+            try
+            {
+                Process[] processes = Process.GetProcesses();
+
+                foreach (var process in processes)
+                {
+                    string processName = process.ProcessName.ToLower();
+                    foreach (var gameKeyword in gameProcessList)
+                    {
+                        if (processName.Contains(gameKeyword.ToLower()))
+                        {
+                            //log.Info($"杀死进程: {processName}");
+                            process.Kill();
+                            break;
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                //log.Debug($"发生错误: {ex.Message}");
+            }
+        }
+
+        private List<Keys> ParseHotkeyString(string hotkeyString)
+        {
+            var keyParts = hotkeyString.Split(new[] { " + " }, StringSplitOptions.None);
+            List<Keys> keyList = new List<Keys>();
+
+            foreach (var part in keyParts)
+            {
+                var trimmedPart = part.Trim();
+
+                if (Enum.TryParse(trimmedPart, ignoreCase: true, out Keys key))
+                {
+                    keyList.Add(key);
+                }
+                else
+                {
+                    //log.Debug($"无法识别的快捷键：{trimmedPart}");
+                }
+            }
+
+            return keyList;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // 查看/修改 配置文件
@@ -255,6 +359,35 @@ namespace MouseClick
                 UnSubscribe();
             }
             Config.ClickOn = materialSwitch1.Checked;
+        }
+
+        private void materialSwitch4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (materialSwitch4.Checked)
+            {
+                if (KillKeysString == "")
+                {
+                    MessageBox.Show("请先设置结束进程快捷键", "提示");
+                    var setHotkeyForm = new ShortcutForm();
+                    if (setHotkeyForm.ShowDialog() == DialogResult.OK)
+                    {
+                        KillKeysString = setHotkeyForm.HotKeyTextBox.Text;
+                        setHotkeyForm.Dispose();
+                    }
+                    else
+                    {
+                        materialSwitch4.Checked = false;
+                        setHotkeyForm.Dispose();
+                        return;
+                    }
+                }
+                KillSubscribe();
+            }
+            else
+            {
+                KillUnSubscribe();
+            }
+            Config.KillProcessOn = materialSwitch4.Checked;
         }
 
         private System.Threading.Timer autoDetectTimer;
@@ -404,6 +537,20 @@ namespace MouseClick
             {
                 Config.HotKeyCode = hotKeyCode;
             }
+        }
+
+        private void HotkeyKillSetButton_Clicked(object sender, EventArgs e)
+        {
+            var setHotkeyForm = new ShortcutForm();
+            if(materialSwitch4.Checked)
+                KillUnSubscribe();
+            if (setHotkeyForm.ShowDialog() == DialogResult.OK)
+            {
+                KillKeysString = setHotkeyForm.HotKeyTextBox.Text;
+            }
+            setHotkeyForm.Dispose();
+            if (materialSwitch4.Checked)
+                KillSubscribe();
         }
     }
 }

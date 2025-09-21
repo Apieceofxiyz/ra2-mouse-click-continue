@@ -1,6 +1,8 @@
-﻿namespace MouseClick
+﻿using MaterialSkin.Controls;
+
+namespace MouseClick
 {
-    partial class Form1
+    partial class Form1 : MaterialForm
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -48,6 +50,8 @@
             this.materialRadioButton2 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialRadioButton3 = new MaterialSkin.Controls.MaterialRadioButton();
             this.materialSwitch3 = new MaterialSkin.Controls.MaterialSwitch();
+            this.materialSwitch4 = new MaterialSkin.Controls.MaterialSwitch();
+            this.HotkeyKillSetButton = new MaterialSkin.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -179,12 +183,12 @@
             this.materialButton1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.materialButton1.HighEmphasis = true;
             this.materialButton1.Icon = null;
-            this.materialButton1.Location = new System.Drawing.Point(9, 292);
+            this.materialButton1.Location = new System.Drawing.Point(9, 325);
             this.materialButton1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.materialButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialButton1.Name = "materialButton1";
             this.materialButton1.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.materialButton1.Size = new System.Drawing.Size(280, 36);
+            this.materialButton1.Size = new System.Drawing.Size(292, 36);
             this.materialButton1.TabIndex = 12;
             this.materialButton1.Text = "更 多 设 置 ( 需 要 重 启 )";
             this.materialButton1.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -197,12 +201,12 @@
             this.materialSlider1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.materialSlider1.Depth = 0;
             this.materialSlider1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialSlider1.Location = new System.Drawing.Point(14, 172);
+            this.materialSlider1.Location = new System.Drawing.Point(14, 205);
             this.materialSlider1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialSlider1.Name = "materialSlider1";
             this.materialSlider1.RangeMax = 30;
             this.materialSlider1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.materialSlider1.Size = new System.Drawing.Size(270, 40);
+            this.materialSlider1.Size = new System.Drawing.Size(287, 40);
             this.materialSlider1.TabIndex = 28;
             this.materialSlider1.Text = "连点次数";
             this.materialSlider1.Value = 10;
@@ -228,7 +232,7 @@
             // leftClickSwitch
             // 
             this.leftClickSwitch.Depth = 0;
-            this.leftClickSwitch.Location = new System.Drawing.Point(14, 222);
+            this.leftClickSwitch.Location = new System.Drawing.Point(14, 255);
             this.leftClickSwitch.Margin = new System.Windows.Forms.Padding(0);
             this.leftClickSwitch.MouseLocation = new System.Drawing.Point(-1, -1);
             this.leftClickSwitch.MouseState = MaterialSkin.MouseState.HOVER;
@@ -244,7 +248,7 @@
             // 
             this.rightClickSwitch.BackColor = System.Drawing.SystemColors.Control;
             this.rightClickSwitch.Depth = 0;
-            this.rightClickSwitch.Location = new System.Drawing.Point(162, 222);
+            this.rightClickSwitch.Location = new System.Drawing.Point(179, 255);
             this.rightClickSwitch.Margin = new System.Windows.Forms.Padding(0);
             this.rightClickSwitch.MouseLocation = new System.Drawing.Point(-1, -1);
             this.rightClickSwitch.MouseState = MaterialSkin.MouseState.HOVER;
@@ -259,7 +263,7 @@
             // materialRadioButton1
             // 
             this.materialRadioButton1.Depth = 0;
-            this.materialRadioButton1.Location = new System.Drawing.Point(6, 252);
+            this.materialRadioButton1.Location = new System.Drawing.Point(6, 285);
             this.materialRadioButton1.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton1.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton1.MouseState = MaterialSkin.MouseState.HOVER;
@@ -275,7 +279,7 @@
             // materialRadioButton2
             // 
             this.materialRadioButton2.Depth = 0;
-            this.materialRadioButton2.Location = new System.Drawing.Point(107, 252);
+            this.materialRadioButton2.Location = new System.Drawing.Point(110, 285);
             this.materialRadioButton2.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton2.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton2.MouseState = MaterialSkin.MouseState.HOVER;
@@ -291,7 +295,7 @@
             // materialRadioButton3
             // 
             this.materialRadioButton3.Depth = 0;
-            this.materialRadioButton3.Location = new System.Drawing.Point(193, 252);
+            this.materialRadioButton3.Location = new System.Drawing.Point(210, 285);
             this.materialRadioButton3.Margin = new System.Windows.Forms.Padding(0);
             this.materialRadioButton3.MouseLocation = new System.Drawing.Point(-1, -1);
             this.materialRadioButton3.MouseState = MaterialSkin.MouseState.HOVER;
@@ -320,11 +324,52 @@
             this.materialSwitch3.UseVisualStyleBackColor = true;
             this.materialSwitch3.CheckedChanged += new System.EventHandler(this.materialSwitch3_CheckedChanged);
             // 
+            // materialSwitch4
+            // 
+            this.materialSwitch4.Depth = 0;
+            this.materialSwitch4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.materialSwitch4.Location = new System.Drawing.Point(13, 172);
+            this.materialSwitch4.Margin = new System.Windows.Forms.Padding(0);
+            this.materialSwitch4.MouseLocation = new System.Drawing.Point(-1, -1);
+            this.materialSwitch4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialSwitch4.Name = "materialSwitch4";
+            this.materialSwitch4.Ripple = true;
+            this.materialSwitch4.Size = new System.Drawing.Size(199, 24);
+            this.materialSwitch4.TabIndex = 39;
+            this.materialSwitch4.Text = "快捷键杀死游戏黑屏";
+            this.materialSwitch4.UseVisualStyleBackColor = true;
+            this.materialSwitch4.CheckedChanged += new System.EventHandler(this.materialSwitch4_CheckedChanged);
+            // 
+            // HotkeyKillSetButton
+            // 
+            this.HotkeyKillSetButton.AutoSize = false;
+            this.HotkeyKillSetButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.HotkeyKillSetButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.HotkeyKillSetButton.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.HotkeyKillSetButton.Depth = 0;
+            this.HotkeyKillSetButton.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.HotkeyKillSetButton.HighEmphasis = true;
+            this.HotkeyKillSetButton.Icon = null;
+            this.HotkeyKillSetButton.Location = new System.Drawing.Point(216, 170);
+            this.HotkeyKillSetButton.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.HotkeyKillSetButton.MouseState = MaterialSkin.MouseState.HOVER;
+            this.HotkeyKillSetButton.Name = "HotkeyKillSetButton";
+            this.HotkeyKillSetButton.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.HotkeyKillSetButton.Size = new System.Drawing.Size(85, 27);
+            this.HotkeyKillSetButton.TabIndex = 40;
+            this.HotkeyKillSetButton.Text = "设置快捷键";
+            this.HotkeyKillSetButton.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.HotkeyKillSetButton.UseAccentColor = false;
+            this.HotkeyKillSetButton.UseVisualStyleBackColor = true;
+            this.HotkeyKillSetButton.Click += new System.EventHandler(this.HotkeyKillSetButton_Clicked);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 340);
+            this.ClientSize = new System.Drawing.Size(310, 370);
+            this.Controls.Add(this.HotkeyKillSetButton);
+            this.Controls.Add(this.materialSwitch4);
             this.Controls.Add(this.materialSwitch3);
             this.Controls.Add(this.materialRadioButton3);
             this.Controls.Add(this.materialRadioButton2);
@@ -347,8 +392,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(300, 340);
-            this.MinimumSize = new System.Drawing.Size(300, 340);
+            this.MaximumSize = new System.Drawing.Size(310, 370);
+            this.MinimumSize = new System.Drawing.Size(310, 370);
             this.Name = "Form1";
             this.Sizable = false;
             this.Text = "鼠标连点器 (Ra2定制版)";
@@ -380,6 +425,8 @@
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton2;
         private MaterialSkin.Controls.MaterialRadioButton materialRadioButton3;
         private MaterialSkin.Controls.MaterialSwitch materialSwitch3;
+        private MaterialSkin.Controls.MaterialSwitch materialSwitch4;
+        private MaterialSkin.Controls.MaterialButton HotkeyKillSetButton;
     }
 }
 
